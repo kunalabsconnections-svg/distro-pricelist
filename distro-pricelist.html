@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0F172A">
+<title>DISTRO PRICE LIST</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:#F8FAFC;color:#0F172A;font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;overscroll-behavior:none;
+}
+:root{
+  --accent:#16A34A;
+  --accent-dark:#15803D;
+  --surface:#FFFFFF;--border:#E2E8F0;--muted:#64748B;
+  --radius-sm:8px;--radius-md:14px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.10),0 4px 16px rgba(0,0,0,.06);
+}
+/* HEADER */
+.header{
+  position:sticky;top:0;z-index:200;
+  background:linear-gradient(135deg,#0F172A 0%,#1E293B 100%);
+  padding:0 16px;padding-top:env(safe-area-inset-top);
+  box-shadow:0 2px 20px rgba(0,0,0,.30);
+}
+.header-inner{max-width:680px;margin:0 auto;padding:14px 0 12px}
+.header-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.h-icon{
+  width:40px;height:40px;border-radius:11px;background:var(--accent);
+  display:grid;place-items:center;font-size:20px;flex-shrink:0;
+  box-shadow:0 0 0 3px rgba(255,255,255,.12);
+}
+.h-title{flex:1}
+.h-title h1{color:#F8FAFC;font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.2}
+.h-title p{color:#94A3B8;font-size:11px;font-weight:500;margin-top:2px}
+.live-badge{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;padding:4px 10px;font-size:11px;color:#94A3B8;font-weight:600;
+  white-space:nowrap;
+}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;background:#22C55E;
+  box-shadow:0 0 0 3px rgba(34,197,94,.2);animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+/* SEARCH */
+.search-wrap{position:relative}
+.search-wrap input{
+  width:100%;background:rgba(255,255,255,.10);
+  border:1.5px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);
+  padding:9px 14px 9px 36px;font-family:inherit;font-size:14px;
+  color:#F8FAFC;outline:none;transition:all .2s;
+}
+.search-wrap input::placeholder{color:#64748B}
+.search-wrap input:focus{
+  background:rgba(255,255,255,.15);border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(22,163,74,.25);
+}
+.search-icon{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:#64748B;font-size:15px;pointer-events:none;
+}
+/* CATEGORY NAV */
+.cat-nav{
+  overflow-x:auto;scrollbar-width:none;display:flex;gap:6px;
+  padding:10px 12px;border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.cat-nav::-webkit-scrollbar{display:none}
+.cat-btn{
+  flex-shrink:0;border:1.5px solid var(--border);background:transparent;
+  border-radius:20px;padding:5px 14px;font-family:inherit;
+  font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);
+  transition:all .15s;white-space:nowrap;
+}
+.cat-btn.active{background:var(--accent);border-color:var(--accent);color:#FFF}
+/* MAIN */
+.main{padding:10px 12px 100px;max-width:680px;margin:0 auto}
+/* GROUP LABEL */
+.group-lbl{
+  font-size:10px;font-weight:700;color:#94A3B8;
+  text-transform:uppercase;letter-spacing:1.5px;padding:18px 4px 6px;
+}
+/* BRAND CARD */
+.brand-card{
+  background:var(--surface);border-radius:var(--radius-md);
+  box-shadow:var(--shadow-sm);border:1px solid var(--border);
+  overflow:hidden;margin-bottom:10px;transition:box-shadow .2s;
+}
+.brand-card:hover{box-shadow:var(--shadow-md)}
+.brand-hdr{
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+  cursor:pointer;user-select:none;
+}
+.brand-hdr:active{filter:brightness(.9)}
+.b-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);flex-shrink:0}
+.b-name{font-size:13px;font-weight:800;color:#FFF;flex:1;letter-spacing:.3px}
+.b-count{
+  font-size:11px;color:rgba(255,255,255,.6);font-weight:500;
+  background:rgba(0,0,0,.18);border-radius:12px;padding:2px 8px;
+}
+.b-chev{color:rgba(255,255,255,.5);font-size:12px;transition:transform .25s}
+.brand-card.collapsed .b-chev{transform:rotate(-90deg)}
+.brand-card.collapsed .col-hdr,.brand-card.collapsed .item-list{display:none}
+/* COL HEADER */
+.col-hdr{
+  display:flex;justify-content:space-between;padding:6px 14px;
+  background:#F8FAFC;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.col-hdr span{font-size:10px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:1px}
+/* ITEM ROW */
+.item-row{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:11px 14px;border-bottom:1px solid #F1F5F9;transition:background .1s;
+}
+.item-row:last-child{border-bottom:none}
+.item-row:active{background:#F8FAFC}
+.item-name{flex:1;font-size:13px;font-weight:500;color:#1E293B;line-height:1.35}
+.new-tag{
+  display:inline-block;background:#FEF9C3;color:#854D0E;
+  font-size:9px;font-weight:700;border-radius:4px;
+  padding:1px 5px;margin-left:4px;vertical-align:middle;letter-spacing:.5px;
+}
+.item-price{
+  font-size:17px;font-weight:800;color:var(--accent);
+  white-space:nowrap;min-width:72px;text-align:right;
+}
+.item-price.na{font-size:13px;color:#CBD5E1;font-weight:500}
+/* SKELETON */
+.skel-wrap{padding:12px 12px;max-width:680px;margin:0 auto}
+.skel-card{
+  background:#FFF;border-radius:var(--radius-md);border:1px solid var(--border);
+  overflow:hidden;margin-bottom:10px;
+}
+.skel-h{height:46px;background:#E2E8F0;animation:shim 1.4s ease infinite}
+.skel-r{height:44px;background:#F8FAFC;border-top:1px solid var(--border);animation:shim 1.4s ease infinite}
+.skel-r:nth-child(odd){background:#F1F5F9}
+@keyframes shim{0%,100%{opacity:1}50%{opacity:.45}}
+/* ERROR */
+.err-state{text-align:center;padding:48px 24px;color:var(--muted)}
+.err-state .ei{font-size:44px;margin-bottom:14px}
+.err-state h3{font-size:17px;font-weight:700;color:#0F172A;margin-bottom:8px}
+.err-state p{font-size:13px;line-height:1.6;margin-bottom:22px;max-width:320px;margin-left:auto;margin-right:auto}
+.retry-btn{
+  background:var(--accent);color:#FFF;border:none;border-radius:var(--radius-sm);
+  padding:11px 28px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;
+}
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:#1E293B;color:#F8FAFC;border-radius:24px;padding:10px 20px;
+  font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);
+  opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:400;
+}
+.toast.show{opacity:1}
+/* FOOTER */
+.footer{
+  text-align:center;color:#CBD5E1;font-size:11px;
+  padding:20px 16px 48px;max-width:680px;margin:0 auto;
+}
+.footer a{color:var(--accent);text-decoration:none;font-weight:600}
+.hidden{display:none!important}
+@media(min-width:640px){
+  .main,.skel-wrap{padding-left:24px;padding-right:24px}
+  .item-name{font-size:14px}
+  .item-price{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div class="h-icon">📦</div>
+      <div class="h-title">
+        <h1>DISTRO PRICE LIST</h1>
+        <p>For Distributors & Wholesalers</p>
+      </div>
+      <div class="live-badge">
+        <div class="live-dot" id="liveDot"></div>
+        <span id="liveStatus">Loading</span>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="searchInput" placeholder="Search products..."
+             autocomplete="off" autocorrect="off" spellcheck="false"
+             oninput="onSearch(this.value)">
+    </div>
+  </div>
+</div>
+
+<div class="cat-nav" id="catNav">
+  <button class="cat-btn active" data-group="all" onclick="filterGroup('all',this)">All</button>
+</div>
+
+<div class="skel-wrap" id="skeleton">
+  <div class="skel-card"><div class="skel-h"></div><div class="skel-r"></div><div class="skel-r"></div><div class="skel-r"></div><div class="skel-r"></div></div>
+  <div class="skel-card"><div class="skel-h"></div><div class="skel-r"></div><div class="skel-r"></div><div class="skel-r"></div></div>
+  <div class="skel-card"><div class="skel-h"></div><div class="skel-r"></div><div class="skel-r"></div><div class="skel-r"></div><div class="skel-r"></div></div>
+  <div class="skel-card"><div class="skel-h"></div><div class="skel-r"></div><div class="skel-r"></div></div>
+</div>
+
+<main class="main hidden" id="mainContent"></main>
+<div class="toast" id="toast"></div>
+
+<div class="footer hidden" id="footer">
+  Updated: <strong id="updatedAt">—</strong> &nbsp;·&nbsp; Prices per unit unless noted &nbsp;·&nbsp;
+  <a href="#" onclick="loadData();return false">&#8635; Refresh</a>
+</div>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────────
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzx6L0OZCKiGRiFM1mOIyTp_5J-aqGZo6yWsX-gJnGFVmSIgAFC0sLf0eQ5HtwyvlBlxw/exec';
+var MODE = 'distro';
+
+// ── STATE ─────────────────────────────────────────────────────
+var allSections = [];
+var currentGroup = 'all';
+
+// ── BRAND COLORS ──────────────────────────────────────────────
+var COLORS = {
+  'SEDA'                       : '#1B5E20',
+  'HYDROXIE'                   : '#0D47A1',
+  'ON7'                        : '#4A148C',
+  'DOZO'                       : '#E65100',
+  'SOMA'                       : '#BF360C',
+  'HUSH KRATOM'                : '#004D40',
+  'MIT (MITRAGAIA)'            : '#263238',
+  'HEMP / MUSHROOM'            : '#33691E',
+  'KAVA / SHOT'                : '#006064',
+  'OPMS'                       : '#1A237E',
+  'REMARKABLE HERBS — POWDERS' : '#558B2F',
+  'WHOLE HERBS — POWDERS'      : '#33691E',
+  'WHOLE HERBS — CAPSULES'     : '#2E7D32',
+  'KRAVE'                      : '#AD1457',
+  'BUMBLE BEE'                 : '#F57F17',
+  'VAPES'                      : '#4527A0',
+  'NIC POUCHES'                : '#00695C'
+};
+function brandColor(b){ return COLORS[b] || '#334155'; }
+
+// ── LOAD DATA ─────────────────────────────────────────────────
+function loadData() {
+  setStatus('loading');
+  var url = SCRIPT_URL + '?mode=' + MODE + '&cb=' + Date.now();
+  fetch(url, {cache:'no-store'})
+    .then(function(r){
+      if (!r.ok) throw new Error('Server returned ' + r.status + '. Make sure the Web App is deployed with Anyone access.');
+      return r.json();
+    })
+    .then(function(data){
+      allSections = data.sections || [];
+      if (allSections.length === 0) throw new Error('No data returned. Make sure you ran setupSheet() first.');
+      buildNav();
+      render('all', '');
+      setStatus('live');
+      var d = new Date(data.updated);
+      document.getElementById('updatedAt').textContent =
+        d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) +
+        ' at ' + d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+      document.getElementById('skeleton').classList.add('hidden');
+      document.getElementById('mainContent').classList.remove('hidden');
+      document.getElementById('footer').classList.remove('hidden');
+    })
+    .catch(function(err){
+      showError(err.message || 'Unknown error');
+    });
+}
+
+// ── STATUS ────────────────────────────────────────────────────
+function setStatus(s) {
+  var dot = document.getElementById('liveDot');
+  var txt = document.getElementById('liveStatus');
+  if (s === 'live')    { dot.style.background='#22C55E'; txt.textContent='Live'; }
+  if (s === 'loading') { dot.style.background='#F59E0B'; txt.textContent='Loading…'; }
+  if (s === 'error')   { dot.style.background='#EF4444'; txt.textContent='Error'; }
+}
+
+// ── BUILD NAV ─────────────────────────────────────────────────
+function buildNav() {
+  var nav = document.getElementById('catNav');
+  nav.innerHTML = '';
+  addNavBtn(nav, 'All', 'all', true);
+  var seen = {};
+  allSections.forEach(function(s){
+    if (!seen[s.group]) { seen[s.group]=1; addNavBtn(nav, s.group, s.group, false); }
+  });
+}
+function addNavBtn(nav, label, group, active) {
+  var btn = document.createElement('button');
+  btn.className = 'cat-btn' + (active ? ' active' : '');
+  btn.textContent = label;
+  btn.dataset.group = group;
+  btn.addEventListener('click', function(){ filterGroup(group, btn); });
+  nav.appendChild(btn);
+}
+
+// ── FILTER ────────────────────────────────────────────────────
+function filterGroup(group, btn) {
+  currentGroup = group;
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  btn.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  render(group, '');
+}
+
+// ── SEARCH ────────────────────────────────────────────────────
+function onSearch(q) {
+  currentGroup = 'all';
+  document.querySelectorAll('.cat-btn').forEach(function(b){ b.classList.remove('active'); });
+  var allBtn = document.querySelector('.cat-btn[data-group="all"]');
+  if (allBtn) allBtn.classList.add('active');
+  render('all', q.toLowerCase().trim());
+}
+
+// ── RENDER ────────────────────────────────────────────────────
+function render(group, q) {
+  var container = document.getElementById('mainContent');
+  container.innerHTML = '';
+  var lastGroup = null;
+  var totalCards = 0;
+
+  allSections.forEach(function(sec){
+    if (group !== 'all' && sec.group !== group) return;
+
+    var items = sec.items.filter(function(it){
+      return !q || it.name.toLowerCase().indexOf(q) !== -1;
+    });
+    if (items.length === 0) return;
+    totalCards++;
+
+    // Group separator
+    if (sec.group !== lastGroup) {
+      var lbl = document.createElement('div');
+      lbl.className = 'group-lbl';
+      lbl.textContent = sec.group;
+      container.appendChild(lbl);
+      lastGroup = sec.group;
+    }
+
+    // Card
+    var card = document.createElement('div');
+    card.className = 'brand-card';
+
+    // Header (clickable to collapse)
+    var hdr = document.createElement('div');
+    hdr.className = 'brand-hdr';
+    hdr.style.background = brandColor(sec.brand);
+    hdr.innerHTML =
+      '<div class="b-dot"></div>' +
+      '<div class="b-name">' + esc(sec.brand) + '</div>' +
+      '<div class="b-count">' + items.length + '</div>' +
+      '<div class="b-chev">&#9660;</div>';
+    hdr.addEventListener('click', function(){ card.classList.toggle('collapsed'); });
+    card.appendChild(hdr);
+
+    // Column header
+    var colHdr = document.createElement('div');
+    colHdr.className = 'col-hdr';
+    colHdr.innerHTML = '<span>ITEM</span><span>PRICE</span>';
+    card.appendChild(colHdr);
+
+    // Item rows
+    var list = document.createElement('div');
+    list.className = 'item-list';
+    items.forEach(function(it){
+      var row = document.createElement('div');
+      row.className = 'item-row';
+      var nameHtml = esc(it.name).replace(/&#9733; NEW/g,'<span class="new-tag">NEW</span>');
+      var price = (MODE === 'store') ? it.store : it.distro;
+      var priceStr, priceClass;
+      if (price !== null && price !== undefined && price !== '') {
+        priceStr = '$' + Number(price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        priceClass = 'item-price';
+      } else {
+        priceStr = '—';
+        priceClass = 'item-price na';
+      }
+      row.innerHTML =
+        '<div class="item-name">' + nameHtml + '</div>' +
+        '<div class="' + priceClass + '">' + priceStr + '</div>';
+      list.appendChild(row);
+    });
+    card.appendChild(list);
+    container.appendChild(card);
+  });
+
+  if (totalCards === 0) {
+    container.innerHTML =
+      '<div class="err-state">' +
+      '<div class="ei">&#128269;</div>' +
+      '<h3>No results</h3>' +
+      '<p>No products match <strong>"' + esc(q || group) + '"</strong></p>' +
+      '</div>';
+  }
+}
+
+// ── ERROR ─────────────────────────────────────────────────────
+function showError(msg) {
+  setStatus('error');
+  document.getElementById('skeleton').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('hidden');
+  document.getElementById('mainContent').innerHTML =
+    '<div class="err-state">' +
+    '<div class="ei">&#9888;&#65039;</div>' +
+    '<h3>Could not load prices</h3>' +
+    '<p>' + esc(msg) + '</p>' +
+    '<button class="retry-btn" onclick="loadData()">Try Again</button>' +
+    '</div>';
+}
+
+// ── UTILS ─────────────────────────────────────────────────────
+function esc(s){
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+// ── INIT ──────────────────────────────────────────────────────
+loadData();
+</script>
+</body>
+</html>
